@@ -1,5 +1,5 @@
-import ContactForm from './phonebook/form/ContactForm';
-import FilterContact from './phonebook/filter/Filter';
+import ContactForm from './form/ContactForm';
+import FilterContact from './filter/Filter';
 
 import style from './app.module.css';
 
