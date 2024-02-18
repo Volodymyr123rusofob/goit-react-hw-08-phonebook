@@ -3,9 +3,12 @@ import * as contactApi from '../../api/contacts-api';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/featchAll',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState();
+    const persistedToken = state.auth.token;
+
     try {
-      const data = await contactApi.requestContacts();
+      const data = await contactApi.requestContacts(persistedToken);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

@@ -1,9 +1,9 @@
 import ContactForm from './form/ContactForm';
 import FilterContact from './filter/Filter';
 
-import style from './app.module.css';
+import style from './appContact.module.css';
 
-const App = () => {
+export const AppContact = () => {
   return (
     <div className={style.box}>
       <div className={style.boxdiv}>
@@ -17,5 +17,3 @@ const App = () => {
     </div>
   );
 };
-
-export default App;

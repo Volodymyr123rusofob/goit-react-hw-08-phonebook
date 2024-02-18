@@ -1,4 +1,4 @@
-import RegisterForm from '../components/registerForm/RegisterForm';
+import { RegisterForm } from '../components/UserMenu/ContactAuth/RegisterForm/RegisterForm';
 
 const RegisterPage = () => {
   return (
