@@ -4,11 +4,8 @@ import * as contactApi from '../../api/contacts-api';
 export const fetchContacts = createAsyncThunk(
   'contacts/featchAll',
   async (_, { rejectWithValue, getState }) => {
-    const state = getState();
-    const persistedToken = state.auth.token;
-
     try {
-      const data = await contactApi.requestContacts(persistedToken);
+      const data = await contactApi.requestContacts();
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

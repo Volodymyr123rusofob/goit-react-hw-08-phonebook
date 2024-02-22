@@ -29,8 +29,8 @@ export const logOut = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await contactApi.clearAuthContact();
-      contactApi.clearAuthHeader();
+      const data = await contactApi.clearAuthContact();
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -40,19 +40,20 @@ export const logOut = createAsyncThunk(
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
   async (_, { rejectWithValue, getState }) => {
-    const state = getState();
-    const persistedToken = state.auth.token;
-
-    if (persistedToken === null) {
-      return rejectWithValue('Unable to fetch user');
-    }
-
     try {
-      contactApi.setAuthHeader(persistedToken);
-      const res = await contactApi.setAuth();
-      return res.data;
+      const { auth } = getState();
+      const data = await contactApi.setAuth(auth.token);
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
+  },
+  {
+    condition: (_, { getState }) => {
+      const { auth } = getState();
+      if (!auth.token) {
+        return false;
+      }
+    },
   }
 );
